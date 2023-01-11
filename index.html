@@ -1,0 +1,85 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>router</title>
+  </head>
+  <body>
+    <nav id="nav">
+      <a href="#/">home</a>
+      <a href="#/about">about</a>
+      <a href="#/shop">shop</a>
+      <a href="#/mine">mine</a>
+    </nav>
+    <div id="content"></div>
+
+    <script>
+      class VueRouter {
+        // 路由
+        constructor(routes) {
+          this.routes = routes
+          this.currentHash = ''
+          this.refresh = this.refresh.bind(this)
+
+          window.addEventListener('load', this.refresh, false)
+
+          window.addEventListener('hashchange', this.refresh, false)
+        }
+
+        getUrlPath(url) {
+          let _url =
+            url.indexOf('#') > 0 ? url.slice(url.indexOf('#') + 1) : '/'
+          console.log('_url:' + _url)
+          return _url
+        }
+
+        refresh(event) {
+          // url hash发生改变的时候，拿当前的hash
+          console.log(event)
+          let newHash = '',
+            oldHash = null
+          if (event.oldURL) {
+            oldHash = this.getUrlPath(event.oldURL || '')
+            newHash = this.getUrlPath(event.oldURL || '')
+          } else {
+            newHash = this.getUrlPath(window.location.hash)
+          }
+          this.currentHash = newHash
+          console.log(newHash)
+          this.matchComponent()
+        }
+
+        matchComponent() {
+          let curRoute = this.routes.find(
+            (route) => route.path === this.currentHash
+          )
+          if (!curRoute) {
+            curRoute = this.routes.find((route) => route.path === '/')
+          }
+          const { component } = curRoute
+          document.querySelector('#content').innerHTML = component
+        }
+      }
+
+      const router = new VueRouter([
+        {
+          path: '/',
+          component: '首页'
+        },
+        {
+          path: '/about',
+          component: 'about'
+        },
+        {
+          path: '/shop',
+          component: '商店'
+        },
+        {
+          path: '/mine',
+          component: '我的'
+        }
+      ])
+    </script>
+  </body>
+</html>
