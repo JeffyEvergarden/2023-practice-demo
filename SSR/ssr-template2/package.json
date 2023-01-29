@@ -1,0 +1,20 @@
+{
+  "name": "ssr-template2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "babel-node src/server.js",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:server": "cross-env WEBPACK_TARGET=node vue-cli-service build --mode server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vue/cli-service": "^5.0.8",
+    "cross-env": "^7.0.3",
+    "vue-server-renderer": "^2.7.14",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
