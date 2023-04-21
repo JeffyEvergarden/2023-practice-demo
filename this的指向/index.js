@@ -16,3 +16,4 @@ var obj = {
 console.log(obj.getFun())
 
 console.log(obj.getFunThis())
+
