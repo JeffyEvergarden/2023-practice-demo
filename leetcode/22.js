@@ -30,4 +30,32 @@ var generateParenthesis = function (n) {
   return arr
 }
 
-generateParenthesis(3)
+
+
+function generateParenthesis2(num) {
+  let result = []
+
+  function gen(str, l, r) {
+    if (l < 0 || r < 0) {
+      return
+    }
+    if (l === 0 && r === 0) {
+      result.push(str)
+    }
+
+    if (l > 0) {
+      gen(str + '(', l - 1, r)
+    }
+
+    if (r > l) {
+      gen(str + ')', l, r - 1)
+    }
+  }
+
+  gen('(', num - 1, num)
+
+  return result
+}
+
+
+console.log(generateParenthesis2(3))

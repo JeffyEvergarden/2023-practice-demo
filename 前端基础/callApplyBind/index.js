@@ -8,7 +8,7 @@ const getName = function (val1, val2) {
 }
 
 Function.prototype._call = function (ctx) {
-  const ob = ctx || global
+  const ob = ctx || globalThis
   ob.func = this
   const args = Array.from(arguments).slice(1)
   const result = obj.func(...args)
@@ -17,7 +17,7 @@ Function.prototype._call = function (ctx) {
 }
 
 Function.prototype._apply = function (ctx, args) {
-  const ob = ctx || global
+  const ob = ctx || globalThis
   ob.func = this
   const result = obj.func(...args)
   delete ob.func
@@ -25,7 +25,7 @@ Function.prototype._apply = function (ctx, args) {
 }
 
 Function.prototype.bind = function (ctx) {
-  const ob = ctx || global
+  const ob = ctx || globalThis
   const fn = this
   let preArg = Array.prototype.slice.call(arguments, 1)
   return function (...args) {

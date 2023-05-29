@@ -65,6 +65,21 @@ var sortColors = function (nums) {
   return nums
 }
 
+// 神户奇迹的方法
+public void sortColors(int[] nums) {
+  let n0 = 0, n1 = 0;
+  for(int i = 0; i < nums.length; i++){
+      let num = nums[i];
+      nums[i] = 2;
+      if(num < 2){
+          nums[n1++] = 1;
+      }
+      if(num < 1){
+          nums[n0++] = 0;
+      }
+  }
+}
+
 // console.log(sortColors([1,1,2,2,0,0]))
 
 // console.log(sortColors([2, 0, 2, 1, 1, 0]))
